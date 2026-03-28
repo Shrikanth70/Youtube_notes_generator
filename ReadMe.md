@@ -1,186 +1,133 @@
-# 🚀 AI YouTube Notes Generator
+# YouTube Notes Maker Agent
 
-An **Agentic AI application** built using CrewAI and OpenRouter that converts YouTube videos into **structured, study-ready markdown notes**.
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![CrewAI](https://img.shields.io/badge/CrewAI-0.61.1-green)](https://github.com/crewAIInc/crew-ai)
 
-🔗 Repo: https://github.com/Shrikanth70/Youtube_notes_generator.git
+A **CrewAI-powered CLI tool** that converts **YouTube video transcripts** into **detailed, structured markdown study notes**. Perfect for students and learners!
 
----
+## 🚀 Features
 
-## 📌 Overview
+- **AI-Powered Notes**: Uses advanced LLM (Nemotron-3) via OpenRouter to generate high-quality notes.
+- **Structured Output**: Always follows a consistent format: Title, Overview, Key Concepts, Steps, Examples, Takeaways, Revision, Glossary.
+- **Multi-Language Support**: Prefers English transcripts, falls back to Hindi/en-IN.
+- **Robust Transcript Fetching**: Handles various YouTube URL formats and edge cases.
+- **One-Command Generation**: Simple CLI: paste URL → get notes.md.
+- **Clean & Study-Ready**: Removes filler words, repetitions; preserves accuracy.
 
-This project automates the process of turning long YouTube videos into **clean, well-structured notes** using AI agents.
+## 📋 Quick Start
 
-It:
-- Extracts transcripts from YouTube videos  
-- Processes raw spoken content  
-- Generates structured notes in markdown format  
+### Prerequisites
 
----
+- Python 3.8+
+- [OpenRouter API Key](https://openrouter.ai/) (free tier works)
 
-## ✨ Features
-
-- 🎥 Input: YouTube video URL  
-- 🧠 AI-powered note generation  
-- 📝 Structured markdown output  
-- ⚡ Clean and readable notes (no filler content)  
-- 💾 Saves output as `.md` file  
-- 🔄 Designed for long-form content (chunking upgrade coming soon)  
-
----
-
-## 🧠 How It Works
-
-
-YouTube URL
-↓
-Extract Video ID
-↓
-Fetch Transcript
-↓
-CrewAI Agent
-↓
-OpenRouter LLM
-↓
-Structured Markdown Notes
-
-
----
-
-## 🏗️ Architecture
-
-
-main.py
-│
-├── utils.py
-│ ├── extract_video_id()
-│ └── get_transcript_text()
-│
-├── Agent (CrewAI)
-│ └── Notes Generator
-│
-└── Output
-└── generated_notes.md
-
-
----
-
-## ⚙️ Tech Stack
-
-- Python  
-- CrewAI (Agent orchestration)  
-- OpenRouter (LLM access)  
-- youtube-transcript-api  
-- python-dotenv  
-
----
-
-## 📦 Installation
-
-### 1. Clone the repository
+### Setup
 
 ```bash
-git clone https://github.com/Shrikanth70/Youtube_notes_generator.git
-cd Youtube_notes_generator
-2. Create virtual environment
-python -m venv .venv
-
-Activate:
-
-Windows
-
-.venv\Scripts\activate
-
-Mac/Linux
-
-source .venv/bin/activate
-3. Install dependencies
+cd notes_maker_agent
 pip install -r requirements.txt
-🔑 Setup Environment Variables
+```
 
-Create a .env file:
+Create `.env` file:
 
-OPENROUTER_API_KEY=your_api_key_here
-OPENROUTER_MODEL=your_open_router_model  {I used nvidia/nemotron-3-super-120b-a12b:free}
+```
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+# Optional: OPENROUTER_MODEL=nvidia/nemotron-3-super-120b-a12b:free
+```
 
-⚠️ Important:
+### Usage
 
-Never push .env to GitHub
-Add .env to .gitignore
-▶️ Usage
-
-Run the application:
-
+```bash
 python main.py
+```
 
-Then enter:
+- Enter YouTube URL (e.g., `https://youtu.be/dQw4w9WgXcQ`)
+- ✅ Notes saved to `generated_notes.md`
+- ✅ Preview printed to console
 
-Enter YouTube video URL:
-📄 Output
+**Example**: Try a lecture video → instant study notes!
 
-The generated notes will be saved as:
+## 🛠 How It Works
 
-generated_notes.md
-🧪 Example Output Structure
-# Title
+```
+1. Input YouTube URL
+   ↓
+2. Extract video ID (utils.py)
+   ↓
+3. Fetch & clean transcript (youtube_transcript_api)
+   ↓
+4. CrewAI Agent processes with structured prompt
+   ↓
+5. Generate & save markdown notes
+```
 
-## Overview
+## 📄 Generated Notes Structure
 
-## Key Concepts
+Every output follows this exact format:
 
-## Step-by-Step Explanation
+- **# Title**: Concise topic summary
+- **## Overview**: 2-4 para explanation
+- **## Key Concepts**: Detailed bullets
+- **## Step-by-Step**: Logical sections
+- **## Important Examples**
+- **## Practical Takeaways**
+- **## Quick Revision**: Fast-review bullets
+- **## Glossary**: Key terms defined
 
-## Important Examples
+## 📁 Project Structure
 
-## Practical Takeaways
+```
+notes_maker_agent/
+├── main.py          # Core CLI + CrewAI logic
+├── utils.py         # YouTube helpers (ID extract, transcript)
+├── requirements.txt # Dependencies
+├── README.md        # 📄 This file!
+├── .env.example     # (Optional: Copy to .env)
+└── generated_notes.md # 💾 Auto-generated output
+```
 
-## Quick Revision
+## 🔧 Configuration
 
-## Glossary
-⚠️ Limitations
-Requires available YouTube transcripts
-Very long videos may be slow without chunking
-Free models may have latency issues
-Output quality depends on transcript clarity
-🚀 Future Improvements
-Chunking for long transcripts
-Multi-agent system (notes + flashcards + quiz)
-Streamlit/Web UI
-Export to PDF / Notion
-Topic segmentation
-💡 Use Cases
-Students creating study notes
-Lecture revision
-Learning from tutorials
-Summarizing long educational videos
-🧠 Key Learnings
-Agentic AI with CrewAI
-LLM integration via OpenRouter
-Prompt engineering for structured output
-Debugging real-world AI pipelines
-🤝 Contributing
+- **Default LLM**: `openrouter/nvidia/nemotron-3-super-120b-a12b:free`
+- Customize in code or `.env`: `OPENROUTER_MODEL`
+- Rate limits: Free tier ~10 req/min
 
-Contributions are welcome!
+## 🐛 Troubleshooting
 
-Fork → Create Branch → Commit → Push → Pull Request
-📜 License
+| Issue              | Solution                             |
+| ------------------ | ------------------------------------ |
+| "Transcript empty" | Video has no captions. Try another.  |
+| API key error      | Check `.env` & OpenRouter dashboard. |
+| Model unavailable  | Fallback to default or change model. |
+| Windows paths      | Use forward slashes or raw strings.  |
 
-MIT License
+**Pro Tip**: Test with videos known to have captions!
 
-👨‍💻 Author
+## 📦 Requirements
 
-Shrikanth
-AI/ML Engineer | Full-Stack Developer
+See [requirements.txt](requirements.txt):
 
-⭐ If you found this useful
+```
+crewai
+openai
+python-dotenv
+youtube-transcript-api
+```
 
-Give this repo a ⭐ and share it!
+## 🤝 Contributing
 
+1. Fork & PR
+2. Add tests
+3. Update this README
 
----
+## 📄 License
 
-# 🔥 Optional Upgrade (Highly Recommended)
+MIT License - see [LICENSE](LICENSE) (create if needed).
 
-Add this at the top later:
+## 🙏 Acknowledgments
 
-```md
-## 🔥 Live Demo (Coming Soon)
+- [CrewAI](https://crewai.com/) for agent framework
+- [OpenRouter](https://openrouter.ai/) for LLM access
+- [YouTube Transcript API](https://github.com/jdepoix/youtube-transcript-api)
+
+**Made for learners, by learners. Star if useful! ⭐**
