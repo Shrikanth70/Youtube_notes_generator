@@ -1,0 +1,31 @@
+<svg width="160" height="100" viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient -->
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7C5CFF"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+
+    <!-- Glow -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Rounded Rectangle -->
+  <rect x="5" y="10" width="150" height="80" rx="22" fill="url(#grad)"/>
+
+  <!-- Inner subtle glass -->
+  <rect x="12" y="16" width="136" height="68" rx="18" fill="white" fill-opacity="0.06"/>
+
+  <!-- Play Icon -->
+  <path d="M60 32C60 28 64.5 25.5 68 27.5L96 43C99.5 45 99.5 49 96 51L68 66.5C64.5 68.5 60 66 60 62V32Z"
+        fill="white"/>
+
+  <!-- AI Spark -->
+  <circle cx="120" cy="28" r="6" fill="white" filter="url(#glow)"/>
+</svg>

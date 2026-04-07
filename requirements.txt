@@ -1,4 +1,0 @@
-crewai
-openai
-python-dotenv
-youtube-transcript-api
